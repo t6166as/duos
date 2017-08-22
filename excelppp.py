@@ -14,6 +14,7 @@ def parse_args():
 def csvconvert(filename,outputname):
 	workbook = exc.open_workbook(filename)
 	intial_li=[]
+	fieldnames = ['sheetname', 'parentObject', 'label','tag','value','context','acronym','pre','post']
 	for i in workbook.sheet_names():
 		processing_sheet=i
 		worksheet = workbook.sheet_by_name(processing_sheet)
@@ -38,8 +39,9 @@ def csvconvert(filename,outputname):
 			initial_li=intial_li.append([i]+worksheet.row_values(j)+[acronym]+[prefix]+[suffix]) 
 	##print(intial_li)
 	with open(outputname, "w",encoding='utf-8') as f:
-    		writer = csv.writer(f,delimiter='~',quotechar ='"')
-    		writer.writerows(intial_li)
+		writer = csv.writer(f,delimiter='~',quotechar ='"')
+		writer.writerow(fieldnames)
+		writer.writerows(intial_li)
 
 
 def main():
