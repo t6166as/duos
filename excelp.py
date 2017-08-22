@@ -19,7 +19,20 @@ def csvconvert(filename,outputname):
 		worksheet = workbook.sheet_by_name(processing_sheet)
 		for j in range(0, worksheet.nrows):
 			acronym=abbvtool(worksheet.cell_value(j,3))
-			initial_li=intial_li.append([i]+worksheet.row_values(j)+[acronym]) 
+			txt_val = worksheet.cell_value(j,4)
+			label = worksheet.cell_value(j,3)
+			prefix='NA'
+			suffix='NA'
+			try:
+				prefix = txt_val.upper().split(label.upper())[0]
+				suffix = txt_val.upper().split(label.upper())[1]
+			except ValueError:
+				pass
+			except:
+                                #prefix = txt_val.upper().split(acronym.upper())[0]
+                                #suffix = txt_val.upper().split(acronym.upper())[1]
+				pass
+			initial_li=intial_li.append([i]+worksheet.row_values(j)+[acronym]+[prefix]+[suffix]) 
 	#print(intial_li)
 	with open(outputname, "w") as f:
     		writer = csv.writer(f,delimiter='~')
