@@ -39,7 +39,7 @@ def csvconvert(filename,outputname):
 			initial_li=intial_li.append([i]+worksheet.row_values(j)+[acronym]+[prefix]+[suffix]) 
 	##print(intial_li)
 	with open(outputname, "w",encoding='utf-8') as f:
-		writer = csv.writer(f,delimiter='~',quotechar ='"')
+		writer = csv.writer(f,delimiter='~',quotechar ='"',quoting=csv.QUOTE_NONNUMERIC)
 		writer.writerow(fieldnames)
 		writer.writerows(intial_li)
 
