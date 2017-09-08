@@ -3,7 +3,7 @@ from nltk.stem import WordNetLemmatizer
 
 lemmatizer = WordNetLemmatizer()
 
-print(lemmatizer.lemmatize("cats are dancing on a hot tin roof"))
+print(lemmatizer.lemmatize("cats are dancing on a hot tin roof.  Moreover, we have found that education is very useful."))
 print(lemmatizer.lemmatize("cacti"))
 print(lemmatizer.lemmatize("geese"))
 print(lemmatizer.lemmatize("rocks"))

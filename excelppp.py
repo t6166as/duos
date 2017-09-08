@@ -3,6 +3,8 @@ import xlrd as exc
 import csv
 import argparse
 from abbv import abbvtool
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 def parse_args():
 	parser=argparse.ArgumentParser( description ='supply file that need to be parsed')
@@ -21,7 +23,12 @@ def csvconvert(filename,outputname):
 		for j in range(2, worksheet.nrows):
 			acronym=abbvtool(worksheet.cell_value(j,3))
 			txt_val = worksheet.cell_value(j,4)
-			label = worksheet.cell_value(j,3)
+			tag=worksheet.cell_value(j,3)
+			words = word_tokenize(txt_val)
+			#print(txt_val, nltk.pos_tag(words))
+			label = worksheet.cell_value(j,2)
+			if 'DATA' in label.upper():
+				print(label, '|', tag, '|', txt_val,'|', nltk.pos_tag(words))
 			prefix=''
 			suffix=''
 			try:

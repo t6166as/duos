@@ -1,11 +1,13 @@
 #!/usr/local/bin/python3
-from nltk.stem import PorterStemmer
+import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
-new_text='crazy datasets are dancing on hot tin roof data'
+
+new_text="…earnings and employment data from the March Current Population Surveys covering years 1967-1997"
+sentences=sent_tokenize(new_text)
 words = word_tokenize(new_text)
-#ps=Stemmer()
-ps = PorterStemmer()
-print(ps.stem("how  are you doing today"))
-for w in words:
- print(ps.stem(w))
+print(nltk.pos_tag(words))
+for s in sentences:
+	words = word_tokenize(s)
+	for w in words:
+		print(w)
 

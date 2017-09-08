@@ -3,7 +3,7 @@ import nltk as nl
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 import argparse
-
+from nltk.corpus import stopwords
 def parse_args():
         parser=argparse.ArgumentParser( description ='supply string to be lemmatized')
         parser.add_argument('--string',required=True)
@@ -14,10 +14,13 @@ def reverse_lemma(string):
  words=nl.word_tokenize(string)
  i=0
  tokens=[]
+ stop_words = set(stopwords.words('english'))
  for j in reversed(words):
-   tokens.append(lemmatizer.lemmatize(j))
-   i=i+1
-   if i>4: break
+ 	if j not in stop_words:
+   		#tokens.append(lemmatizer.lemmatize(j))
+ 		tokens=["pre~"+lemmatizer.lemmatize(j)]+tokens
+ 		i=i+1
+ 		if i>4: break
  #print(tokens)
  return tokens
 

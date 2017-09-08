@@ -3,7 +3,7 @@ import nltk as nl
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 import argparse
-
+from nltk.corpus import stopwords
 def parse_args():
         parser=argparse.ArgumentParser( description ='supply string to be lemmatized')
         parser.add_argument('--string',required=True)
@@ -14,11 +14,12 @@ def lemma(string):
  words=nl.word_tokenize(string)
  i=0
  tokens=[]
+ stop_words = set(stopwords.words('english'))
  for j in words:
-   tokens.append(lemmatizer.lemmatize(j))
-   i=i+1
-   if i>4: break
- print(tokens)
+ 	if j not in stop_words:
+ 		tokens.append('post~'+lemmatizer.lemmatize(j))
+ 		i=i+1
+ 		if i>4: break
  return tokens
 
 
